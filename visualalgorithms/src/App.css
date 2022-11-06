@@ -11,13 +11,14 @@ html {
   height: 90vh;
   background-color: #131313;
   opacity: 0.9;
+  overflow: hidden;
 }
 
 
 .array-bar {
-
   font-display: none;
-  border: 0.1vh solid black;
+  border-inline: #131313 solid 0.1vh;
+  border-radius: 0.1vh;
   opacity: 0.9;
 }
 
@@ -34,14 +35,15 @@ html {
 button {
   appearance: button;
   background-color: #131313;
-  border: 0.2vh solid #000000;
+  border: 0.1vh solid #3c4848;
+  border-radius: 0.9vh;
   opacity: 0.9;
-  border-radius: 0.8vh;
   height: fit-content;
   color: #C0FDFB;
   cursor: pointer;
   font-family: Graphik,-apple-system,system-ui,"Segoe UI";
   font-size: 2vh;
+  font-weight: 500;
   overflow: visible;
   padding-left: 2vh;
   padding-right: 2vh;
@@ -59,24 +61,27 @@ button {
 }
 
 #generate-button {
-  margin-right: 25vh;
+  margin-right: 19vh;
+  margin-left: 2vw;
 }
 
 
 
 
 button:hover {
-  background-color: #235484;
+  background-color: #C0FDFB;
+  color: #131313;
 }
 
 button:active {
-  background-color: #0039D7;
+  background-color: #7ab7b5;
 }
 
 p {
   color: #0e0e0e;
   font-family: Graphik,-apple-system,system-ui,"Segoe UI";
   font-size: 2vh;
+  font-weight: 500;
   overflow: visible;
   padding: 0px 4.5vh;
   position: relative;
@@ -99,23 +104,27 @@ input {
 .input {
   background-color: #131313;
   height: 3vh;
-  width: 6vw;
+  width: 7vw;
   border-radius: 50vh;
+  padding-left: 0.5vh;
+  padding-right: 0.5vh;
   opacity: 0.9;
 
 }
 
 input[type=range]{
   -webkit-appearance: none;
+  appearance: none;
 }
 
 
 
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
+  appearance: none;
   border: none;
-  height: 1.7vh;
-  width: 1.7vh;
+  height: 1.6vh;
+  width: 1.6vh;
   border-radius: 50%;
   background: #C0FDFB;
 
