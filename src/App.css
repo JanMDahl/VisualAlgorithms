@@ -14,6 +14,13 @@ html {
   overflow: hidden;
 }
 
+.slider-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 
 .array-bar {
   font-display: none;
@@ -128,4 +135,53 @@ input[type=range]::-webkit-slider-thumb {
   border-radius: 50%;
   background: #C0FDFB;
 
+}
+
+/* css for iPhone */
+
+@media only screen and (max-width: 600px) {
+  .array-container {
+    height: 80vh;
+  }
+  .button-container {
+    height: 20vh;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .slider-container {
+    padding-left: 2vh;
+    padding-right: 2vh;
+    text-align: center;
+
+  }
+  button {
+    font-size: 0.9vh;
+    padding-left: 1vh;
+    padding-right: 1vh;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    margin: 0;
+  }
+  #generate-button {
+    margin-right: 0vh;
+    margin-left: 0vh;
+  }
+  p {
+    font-size: 1vh;
+    margin-right: 0.4vh;
+    display: inline-block;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    height: 1.5vh;
+    width: 1.5vh;
+  }
+  input[type=range] {
+    width: 25vw;
+    height: 3vh;
+    margin-top: -2vh;
+  }
+  .input {
+    width: 14vw;
+  }
 }

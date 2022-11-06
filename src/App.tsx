@@ -299,18 +299,22 @@ function App() {
         <button onClick={() => mergeSort(array, 0, array.length - 1)} id="sort">Merge sort</button>
         <button onClick={() => radixSort(array, array.length)} id="sort">Radix sort</button>
         <button onClick={() => cocktailSort(array)} id="sort">Cocktail sort</button>
-        <p>Array length</p>
-        <input max={525} min={10} type="range" className="input" defaultValue={arrayLength} onChange={(e) => {
-          setArray(generateArray(e.target.valueAsNumber))
-          setArrayLength(e.target.valueAsNumber)
-        }}></input>
+        <div className="slider-container">
+          <p>Array length</p>
+          <input max={525} min={10} type="range" className="input" defaultValue={arrayLength} onChange={(e) => {
+            setArray(generateArray(e.target.valueAsNumber))
+            setArrayLength(e.target.valueAsNumber)
+          }}></input>
+        </div>
+        <div className="slider-container">
         <p>Sorting speed</p>
         <input max={-2} min={-150} type="range" className="input" value={tickMs} onChange={(e) => setTickMs(e.target.valueAsNumber)}></input>
+        </div>
       </div>
       <div className="array-container">
         {array.map((elem) => (<div className="array-bar" style={{
-          height: (elem.value / 23) + "vh",
-          width: `${(1 / array.length) * 95}%`,
+          height: (elem.value / 21) + "%",
+          width: `${(1 / array.length) * 100}%`,
           backgroundColor: elem.isChanging ? "#006E90" : elem.isAlsoChanging ? "#FF6F59" : elem.isDone ? "#C0FDFB" : elem.isPivot ? "#FCAA67" : "#5D737E"
         }}></div>))}
       </div>
