@@ -15,9 +15,9 @@ class Elem {
 
 function App() {
 
-  const [arrayLength, setArrayLength] = useState(50);
+  const [arrayLength, setArrayLength] = useState(75);
 
-  const [tickMs, setTickMs] = useState(-50);
+  const [tickMs, setTickMs] = useState(-25);
 
   const [array, setArray] = useState<Elem[]>(generateArray(arrayLength));
 
@@ -34,16 +34,14 @@ function App() {
         arr[j].isChanging = true;
         arr[j - 1].isAlsoChanging = true;
 
-        await new Promise(resolve => setTimeout(resolve, Math.abs(Math.floor(tickMs / 2))));
-        setArray(Array.from(arr));
+        await showAndWait(arr);
 
         arr[j].isChanging = false;
         arr[j - 1].isAlsoChanging = false;
         arr[j - 1].isChanging = true;
         arr[j].isAlsoChanging = true;
 
-        await new Promise(resolve => setTimeout(resolve, Math.abs(Math.floor(tickMs / 2))));
-        setArray(Array.from(arr));
+        await showAndWait(arr);
 
         arr[j - 1].isChanging = false;
         arr[j].isAlsoChanging = false;
@@ -63,8 +61,7 @@ function App() {
 
         arr[i].isChanging = true;
         arr[j].isAlsoChanging = true;
-        await new Promise(resolve => setTimeout(resolve, Math.abs(Math.floor(tickMs / 2))));
-        setArray(Array.from(arr));
+        await showAndWait(arr);
 
         let temp = arr[i].value;
         arr[i].value = arr[j].value;
@@ -74,8 +71,7 @@ function App() {
         arr[j].isAlsoChanging = false;
         arr[i].isAlsoChanging = true;
         arr[j].isChanging = true;
-        await new Promise(resolve => setTimeout(resolve, Math.abs(Math.floor(tickMs / 2))));
-        setArray(Array.from(arr));
+        await showAndWait(arr);
 
         arr[i].isAlsoChanging = false;
         arr[j].isChanging = false;
@@ -102,23 +98,97 @@ function App() {
     }
   }
 
+  const merge = async (arr: Elem[], left: number, mid: number, right: number) => {
+    let first = arr.slice(left, mid + 1);
+    let second = arr.slice(mid + 1, right + 1);
+
+    first.forEach((e) => e.isAlsoChanging = true);
+    second.forEach((e) => e.isPivot = true);
+
+    let i = 0;
+    let j = 0;
+
+    let k = left;
+
+    while (i < first.length && j < second.length) {
+      if (first[i].value <= second[j].value) {
+        arr[k] = first[i];
+        i++;
+      } else {
+        arr[k] = second[j];
+        j++;
+      }
+      arr[k].isChanging = true;
+      await showAndWait(arr);
+      arr[k].isChanging = false;
+      k++;
+    }
+
+    while (i < first.length) {
+      arr[k] = first[i];
+        i++;
+        arr[k].isChanging = true;
+      await showAndWait(arr);
+      arr[k].isChanging = false;
+        k++;
+    }
+
+    while (j < second.length) {
+      arr[k] = second[j];
+      j++;
+      arr[k].isChanging = true;
+      await showAndWait(arr);
+      arr[k].isChanging = false;
+      
+      k++;
+    }
+    first.forEach((e) => e.isAlsoChanging = false);
+      second.forEach((e) => e.isPivot = false);
+  }
+
+  const mergeSort = async (arr: Elem[], left: number, right: number) => {
+    if (left < right) {
+      let mid = left + Math.floor((right - left) / 2);
+
+    await mergeSort(arr, left, mid);
+    await mergeSort(arr, mid + 1, right);
+    await merge(arr, left, mid, right);
+
+    }
+    if (left === 0 && right === arr.length - 1) {
+      arr.forEach((e) => e.isDone = true);
+    }
+    await showAndWait(arr);
+
+  }
+
+
+  async function showAndWait(arr: Elem[]) {
+    await new Promise(resolve => setTimeout(resolve, Math.abs(Math.floor(tickMs / 2))));
+        setArray(Array.from(arr));
+  }
+
+  
   return (
     <div>
       <div className="button-container">
         <button onClick={() => setArray(generateArray(arrayLength))} id="generate-button">Generate new array</button>
         <button onClick={() => bubbleSort(array)} id="sort">Bubble sort</button>
         <button onClick={() => quickSort(array, 0, array.length - 1)} id="sort">Quick sort</button>
-        <button id="sort">Sort</button>
-        <p>Array length:</p>
-        <input max={300} min={10} type="range" value={arrayLength} onChange={(e) => setArrayLength(e.target.valueAsNumber)}></input>
-        <p>Sorting speed:</p>
-        <input max={-2} min={-250} type="range" value={tickMs} onChange={(e) => setTickMs(e.target.valueAsNumber)}></input>
+        <button onClick={() => mergeSort(array, 0, array.length - 1)} id="sort">Merge sort</button>
+        <p>Array length</p>
+        <input max={300} min={10} type="range" className ="input" defaultValue={arrayLength} onChange={(e) => { 
+          setArray(generateArray(e.target.valueAsNumber))
+          setArrayLength(e.target.valueAsNumber)
+          }}></input>
+        <p>Sorting speed</p>
+        <input max={-2} min={-150} type="range" className ="input" value={tickMs} onChange={(e) => setTickMs(e.target.valueAsNumber)}></input>
       </div>
       <div className="array-container">
         {array.map((elem) => (<div className="array-bar" style={{
-          height: elem.value + "px",
+          height: (elem.value / 7.5) + "vh",
           width: `${(1 / array.length) * 100}%`,
-          backgroundColor: elem.isChanging ? "#0e3687" : elem.isAlsoChanging ? "#82070f" : elem.isDone ? "#118519" : elem.isPivot ? "#7a510a" : "#131313"
+          backgroundColor: elem.isChanging ? "#006E90" : elem.isAlsoChanging ? "#FF6F59" : elem.isDone ? "#C0FDFB" : elem.isPivot ? "#FCAA67" : "#5D737E"
         }}></div>))}
       </div>
     </div>
