@@ -51,7 +51,6 @@ function App() {
   }
 
   const cocktailSort = async (arr: Elem[]) => {
-
     let swapped = true;
     let start = 0;
     let end = arr.length;
@@ -59,7 +58,7 @@ function App() {
     while (swapped) {
       swapped = false;
 
-      for (let i = start; i < end - 1; ++i) {
+      for (let i = start; i < end - 1; i++) {
         if (arr[i].value > arr[i + 1].value) {
           let temp = arr[i].value;
           arr[i].value = arr[i + 1].value;
@@ -118,7 +117,7 @@ function App() {
       start = start + 1;
     }
     arr.forEach((e) => e.isDone = true);
-}
+  }
 
   const partition = async (arr: Elem[], low: number, high: number) => {
     let pivot = arr[high].value;
@@ -206,6 +205,7 @@ function App() {
     while (j < second.length) {
       arr[k] = second[j];
       j++;
+
       arr[k].isChanging = true;
       await showAndWait(arr);
       arr[k].isChanging = false;
@@ -229,11 +229,11 @@ function App() {
       arr.forEach((e) => e.isDone = true);
     }
     await showAndWait(arr);
-
   }
 
   const getMax = (arr: Elem[], n: number) => {
     let max = arr[0].value;
+
     for (let i = 1; i < n; i++) {
       if (arr[i].value > max) {
         max = arr[i].value;
@@ -265,8 +265,6 @@ function App() {
       count[Math.floor(arr[i].value / exp) % 10]--;
     }
 
-    
-
     for (let i = 0; i < n; i++) {
       arr[i] = output[i];
       arr[i].isChanging = true;
@@ -281,9 +279,9 @@ function App() {
     for (let exp = 1; Math.floor(m / exp) > 0; exp *= 10) {
       await countSort(arr, n, exp);
     }
+
     arr.forEach((e) => e.isDone = true);
     await showAndWait(arr);
-
   }
 
 
@@ -291,9 +289,6 @@ function App() {
     await new Promise(resolve => setTimeout(resolve, Math.abs(Math.floor(tickMs / 2))));
     setArray(Array.from(arr));
   }
-
-
-
 
   return (
     <div>
@@ -320,12 +315,10 @@ function App() {
         }}></div>))}
       </div>
     </div>
-
   );
 }
 
 export default App;
-
 
 const generateArray = (arrL: number): Elem[] => {
   let temp = [];
