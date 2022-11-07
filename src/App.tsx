@@ -23,26 +23,34 @@ function App() {
     for (let i = 0; i < arr.length; i++) {
       for (let j = 1; j < arr.length - i; j++) {
 
-        if (arr[j].value < arr[j - 1].value) {
-          let temp = arr[j].value;
-          arr[j].value = arr[j - 1].value;
-          arr[j - 1].value = temp;
-        }
-
         arr[j].isChanging = true;
         arr[j - 1].isAlsoChanging = true;
 
         await showAndWait(arr);
 
-        arr[j].isChanging = false;
-        arr[j - 1].isAlsoChanging = false;
-        arr[j - 1].isChanging = true;
-        arr[j].isAlsoChanging = true;
+        if (arr[j].value < arr[j - 1].value) {
+          let temp = arr[j].value;
+          arr[j].value = arr[j - 1].value;
+          arr[j - 1].value = temp;
+
+          arr[j].isChanging = false;
+          arr[j].isAlsoChanging = true;
+          arr[j - 1].isChanging = true;
+        }
+
+        
 
         await showAndWait(arr);
 
-        arr[j - 1].isChanging = false;
+        
+
+        arr[j].isChanging = false;
+        arr[j - 1].isAlsoChanging = false;
         arr[j].isAlsoChanging = false;
+        arr[j - 1].isChanging = false;
+
+
+        
       }
       arr[arr.length - i - 1].isDone = true;
     }
@@ -57,27 +65,27 @@ function App() {
       swapped = false;
 
       for (let i = start; i < end - 1; i++) {
-        if (arr[i].value > arr[i + 1].value) {
-          let temp = arr[i].value;
-          arr[i].value = arr[i + 1].value;
-          arr[i + 1].value = temp;
-          swapped = true;
-        }
-
         arr[i].isChanging = true;
         arr[i + 1].isAlsoChanging = true;
 
         await showAndWait(arr);
 
-        arr[i].isChanging = false;
-        arr[i + 1].isAlsoChanging = false;
-        arr[i + 1].isChanging = true;
-        arr[i].isAlsoChanging = true;
+        if (arr[i].value > arr[i + 1].value) {
+          let temp = arr[i].value;
+          arr[i].value = arr[i + 1].value;
+          arr[i + 1].value = temp;
+          swapped = true;
 
+          arr[i].isChanging = false;
+          arr[i].isAlsoChanging = true;
+          arr[i + 1].isChanging = true;
+        }
         await showAndWait(arr);
 
-        arr[i + 1].isChanging = false;
+        arr[i].isChanging = false;
+        arr[i + 1].isAlsoChanging = false;
         arr[i].isAlsoChanging = false;
+        arr[i + 1].isChanging = false;
       }
 
       if (!swapped) {
@@ -89,25 +97,27 @@ function App() {
       end = end - 1;
 
       for (let i = end - 1; i >= start; i--) {
-        if (arr[i].value > arr[i + 1].value) {
-          let temp = arr[i].value;
-          arr[i].value = arr[i + 1].value;
-          arr[i + 1].value = temp;
-          swapped = true;
-        }
-
         arr[i].isChanging = true;
         arr[i + 1].isAlsoChanging = true;
 
         await showAndWait(arr);
 
-        arr[i].isChanging = false;
-        arr[i + 1].isAlsoChanging = false;
-        arr[i + 1].isChanging = true;
-        arr[i].isAlsoChanging = true;
+        if (arr[i].value > arr[i + 1].value) {
+          let temp = arr[i].value;
+          arr[i].value = arr[i + 1].value;
+          arr[i + 1].value = temp;
+          swapped = true;
+
+          arr[i].isChanging = false;
+          arr[i].isAlsoChanging = true;
+          arr[i + 1].isChanging = true;
+        }
+
 
         await showAndWait(arr);
 
+        arr[i].isChanging = false;
+        arr[i + 1].isAlsoChanging = false;
         arr[i + 1].isChanging = false;
         arr[i].isAlsoChanging = false;
       }
@@ -284,7 +294,7 @@ function App() {
 
 
   async function showAndWait(arr: Elem[]) {
-    await new Promise(resolve => setTimeout(resolve, Math.abs(Math.floor(tickMs / 2))));
+    await new Promise(resolve => setTimeout(resolve, Math.abs(Math.floor(tickMs))));
     setArray(Array.from(arr));
   }
 
@@ -307,7 +317,7 @@ function App() {
         </div>
         <div className="slider-container">
         <p>Sorting speed</p>
-        <input max={-2} min={-150} type="range" className="input" defaultValue={tickMs} onChange={(e) => tickMs = e.target.valueAsNumber}></input>
+        <input max={-1} min={-125} type="range" className="input" defaultValue={tickMs} onChange={(e) => tickMs = e.target.valueAsNumber}></input>
         </div>
       </div>
       <div className="array-container">
@@ -327,7 +337,7 @@ const generateArray = (arrL: number): Elem[] => {
   let temp = [];
 
   for (let i = 0; i < arrL; i++) {
-    temp.push(new Elem(Math.floor((Math.random() * 2000) + 5)));
+    temp.push(new Elem(Math.floor((Math.random() * 2000) + 10)));
   }
   return temp;
 }
@@ -336,4 +346,4 @@ const reset = () => {
   window.location.reload();
 }
 
-var tickMs = -10;
+var tickMs = -15;
