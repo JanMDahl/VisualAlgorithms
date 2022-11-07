@@ -17,8 +17,6 @@ function App() {
 
   const [arrayLength, setArrayLength] = useState(75);
 
-  const [tickMs, setTickMs] = useState(-25);
-
   const [array, setArray] = useState<Elem[]>(generateArray(arrayLength));
 
   const bubbleSort = async (arr: Elem[]) => {
@@ -308,7 +306,7 @@ function App() {
         </div>
         <div className="slider-container">
         <p>Sorting speed</p>
-        <input max={-2} min={-150} type="range" className="input" value={tickMs} onChange={(e) => setTickMs(e.target.valueAsNumber)}></input>
+        <input max={-2} min={-150} type="range" className="input" defaultValue={tickMs} onChange={(e) => tickMs = e.target.valueAsNumber}></input>
         </div>
       </div>
       <div className="array-container">
@@ -333,4 +331,4 @@ const generateArray = (arrL: number): Elem[] => {
   return temp;
 }
 
-
+var tickMs = -25;
