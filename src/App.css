@@ -68,8 +68,12 @@ button {
 }
 
 #generate-button {
-  margin-right: 19vh;
+  margin-right: 0vh;
   margin-left: 2vw;
+}
+
+#reset-button {
+  margin-right: 2vw;
 }
 
 
@@ -137,7 +141,6 @@ input[type=range]::-webkit-slider-thumb {
 
 }
 
-/* css for iPhone */
 
 @media only screen and (max-width: 600px) {
   .array-container {
@@ -152,16 +155,20 @@ input[type=range]::-webkit-slider-thumb {
   .slider-container {
     padding-left: 2vh;
     padding-right: 2vh;
+    flex-wrap: wrap;
     text-align: center;
 
   }
   button {
-    font-size: 0.9vh;
-    padding-left: 1vh;
-    padding-right: 1vh;
+    font-size: 1vh;
+    padding-left: 0.5vh;
+    padding-right: 0.5vh;
     padding-top: 1vh;
     padding-bottom: 1vh;
-    margin: 0;
+    margin-top: 0.7vh;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: -0.2vh;
   }
   #generate-button {
     margin-right: 0vh;
@@ -170,6 +177,7 @@ input[type=range]::-webkit-slider-thumb {
   p {
     font-size: 1vh;
     margin-right: 0.4vh;
+    margin-top: -2vh;
     display: inline-block;
   }
   input[type=range]::-webkit-slider-thumb {
@@ -177,9 +185,9 @@ input[type=range]::-webkit-slider-thumb {
     width: 1.5vh;
   }
   input[type=range] {
-    width: 25vw;
-    height: 3vh;
-    margin-top: -2vh;
+    width: 35vw;
+    height: 2.2vh;
+
   }
   .input {
     width: 14vw;

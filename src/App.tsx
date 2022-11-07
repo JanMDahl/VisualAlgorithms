@@ -292,6 +292,7 @@ function App() {
     <div>
       <div className="button-container">
         <button onClick={() => setArray(generateArray(arrayLength))} id="generate-button">Generate new array</button>
+        <button onClick={() => reset()} id="reset-button">Reset</button>
         <button onClick={() => bubbleSort(array)} id="sort">Bubble sort</button>
         <button onClick={() => quickSort(array, 0, array.length - 1)} id="sort">Quick sort</button>
         <button onClick={() => mergeSort(array, 0, array.length - 1)} id="sort">Merge sort</button>
@@ -331,4 +332,8 @@ const generateArray = (arrL: number): Elem[] => {
   return temp;
 }
 
-var tickMs = -25;
+const reset = () => {
+  window.location.reload();
+}
+
+var tickMs = -10;
