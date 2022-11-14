@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/VisualAlgorithms/static/css/main.becad1cb.css",
-    "main.js": "/VisualAlgorithms/static/js/main.e6eef3cd.js",
+    "main.js": "/VisualAlgorithms/static/js/main.f77376ce.js",
     "static/js/787.9db6f3b0.chunk.js": "/VisualAlgorithms/static/js/787.9db6f3b0.chunk.js",
     "index.html": "/VisualAlgorithms/index.html",
     "main.becad1cb.css.map": "/VisualAlgorithms/static/css/main.becad1cb.css.map",
-    "main.e6eef3cd.js.map": "/VisualAlgorithms/static/js/main.e6eef3cd.js.map",
+    "main.f77376ce.js.map": "/VisualAlgorithms/static/js/main.f77376ce.js.map",
     "787.9db6f3b0.chunk.js.map": "/VisualAlgorithms/static/js/787.9db6f3b0.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.becad1cb.css",
-    "static/js/main.e6eef3cd.js"
+    "static/js/main.f77376ce.js"
   ]
 }
